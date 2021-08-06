@@ -8,19 +8,19 @@ using System.Runtime.Serialization;
 
 namespace LazyCsharp
 {
-    class Callback
+    public class Callback
     {
         public Action<Newtonsoft.Json.Linq.JToken> success;
         public Action<Newtonsoft.Json.Linq.JToken> fail;
     }
-    class Database
+    public class Database
     {
-        private string addr;
-        private int port;
-        private int id = 0;
-        private Dictionary<int, Callback> callbacks = new Dictionary<int, Callback> { };
-        private WebSocket ws;
-        private List<string> messageQueue = new List<string> { };
+        public string addr;
+        public int port;
+        public int id = 0;
+        public Dictionary<int, Callback> callbacks = new Dictionary<int, Callback> { };
+        public WebSocket ws;
+        public List<string> messageQueue = new List<string> { };
 
         public class ReceiveObject
         {

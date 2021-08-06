@@ -9,3 +9,4 @@ C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Release\net5.0\LazyCsharp.
 C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Release\net5.0\LazyCsharp.dll
 C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Release\net5.0\ref\LazyCsharp.dll
 C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Release\net5.0\LazyCsharp.pdb
+C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Release\net5.0\LazyCsharp.csproj.AssemblyReference.cache
