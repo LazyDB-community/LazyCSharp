@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using WebSocketSharp;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Threading;
 
 namespace LazyCsharp
 {
@@ -13,6 +13,7 @@ namespace LazyCsharp
         public Action<Newtonsoft.Json.Linq.JToken> success;
         public Action<Newtonsoft.Json.Linq.JToken> fail;
     }
+
     public class Database
     {
         public string addr;
@@ -27,6 +28,27 @@ namespace LazyCsharp
             public bool s { get; set; }
             public int id { get; set; }
             public object r { get; set; }
+        }
+
+        public static class Interval
+        {
+            public static System.Timers.Timer Set(System.Action action, int interval)
+            {
+                var timer = new System.Timers.Timer(interval);
+                timer.Elapsed += (s, e) => {
+                    timer.Enabled = false;
+                    action();
+                    timer.Enabled = true;
+                };
+                timer.Enabled = true;
+                return timer;
+            }
+
+            public static void Stop(System.Timers.Timer timer)
+            {
+                timer.Stop();
+                timer.Dispose();
+            }
         }
 
         public Database(string addr, int port, [Optional] Action<object> onconnect)
@@ -57,7 +79,7 @@ namespace LazyCsharp
                 }
             };
 
-            Task task = SetInterval(sendQueue, TimeSpan.FromSeconds(0.1));
+            Interval.Set(sendQueue, 100);
 
             this.ws.Connect();
         }
@@ -198,13 +220,16 @@ namespace LazyCsharp
             this.send("size", args, callback);
         }
 
-        public static async Task SetInterval(Action action, TimeSpan timeout)
+        public void setTimeout(Action TheAction, int Timeout)
         {
-            await Task.Delay(timeout).ConfigureAwait(false);
-
-            action();
-
-            await SetInterval(action, timeout);
+            Thread t = new Thread(
+                () =>
+                {
+                    Thread.Sleep(Timeout);
+                    TheAction.Invoke();
+                }
+            );
+            t.Start();
         }
     }
 }

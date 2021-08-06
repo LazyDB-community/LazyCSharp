@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>LazyCsharp</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <authors>LazyDB</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">MIT</license>
@@ -20,7 +20,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\bin\Release\net5.0\LazyCsharp.dll" target="lib\net5.0\LazyCsharp.dll" />
+    <file src="C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.dll" target="lib\net5.0\LazyCsharp.dll" />
     <file src="C:\Users\arthu\Downloads\63662041.png" target="63662041.png" />
   </files>
 </package>
