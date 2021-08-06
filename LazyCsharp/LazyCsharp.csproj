@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>LazyDB</Authors>
+    <Company>LazyDB</Company>
+    <Product>LazyDB</Product>
+    <Copyright>© 2021 Web.Workers</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/LazyDB-community/LazyCSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LazyDB-community/LazyCSharp</RepositoryUrl>
+    <Description>Connector for LazyDB in CSharp.</Description>
+    <PackageIcon>63662041.png</PackageIcon>
+    <PackageIconUrl />
+    <NeutralLanguage>en-150</NeutralLanguage>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <RepositoryType>Github</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\63662041.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
