@@ -32,7 +32,7 @@ namespace LazyCsharp
 
         public static class Interval
         {
-            public static System.Timers.Timer Set(System.Action action, int interval)
+            public static System.Timers.Timer Set(Action action, int interval)
             {
                 var timer = new System.Timers.Timer(interval);
                 timer.Elapsed += (s, e) => {
@@ -52,7 +52,7 @@ namespace LazyCsharp
             }
         }
 
-        public Database(string addr, int port, Action<object> onconnect, Action<Object> onclose)
+        public Database(string addr, int port, Action<object> onconnect, Action<object> onclose)
         {
             this.addr = addr;
             this.port = port;
@@ -74,7 +74,7 @@ namespace LazyCsharp
                 {
                     var msg = messages[i];
                     Newtonsoft.Json.Linq.JObject receivedMessage = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(msg);
-                    Newtonsoft.Json.Linq.JToken newReceivedMessage = Newtonsoft.Json.Linq.JToken.FromObject(receivedMessage.ToString());
+                    receivedMessage = Newtonsoft.Json.Linq.JObject.Parse(receivedMessage.ToString().Replace(this.lazy_sep, "|"));
 
                     if (receivedMessage.Value<bool>("s"))
                     {
@@ -127,6 +127,8 @@ namespace LazyCsharp
             };
 
             string message = JsonConvert.SerializeObject(send);
+            message = message.Replace("|", this.lazy_sep);
+
             if (!message.Contains("|"))
             {
                 this.messageQueue.Add(message);
@@ -180,12 +182,11 @@ namespace LazyCsharp
             this.send("create", args, callback);
         }
 
+        /*
+        * IN DEVELOPPEMENT | NOT STABLE
+        */
         public void watch(string keyPath, string command, Callback callback)
         {
-            /*
-             * IN DEVELOPPEMENT
-             */
-            /*var key = keyPath.Split("/").Where(x => string.IsNullOrEmpty(x) == false).ToArray();*/
             var key = keyPath.Split("/");
 
             Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
@@ -259,7 +260,7 @@ namespace LazyCsharp
         }
 
         /*
-         * IN DEVELOPPEMENT
+         * IN DEVELOPPEMENT | NOT STABLE
          */
         public void sort(string keyPath, String character, int number, int count, int start, String order, Callback callback)
         {
@@ -280,40 +281,7 @@ namespace LazyCsharp
             args.Add("result", result);
             args.Add("order", order);
 
-            Console.WriteLine(args);
-
             this.send("sort", args, callback);
         }
     }
-
-    /*
-    * FOR DEBUG
-    */
-    /*class Program
-    {
-        static void Main()
-        {
-            Database db = new Database("eu.indivis.cloud", 42600, delegate (Object s) {
-                Console.WriteLine("LazyDB is start!");
-            }, delegate (Object s) {
-                Console.WriteLine("LazyDB is stop!");
-            });
-
-            Callback callback = new Callback();
-            callback.success = delegate (Newtonsoft.Json.Linq.JToken s) {
-                Console.WriteLine(s);
-            };
-            callback.fail = delegate (Newtonsoft.Json.Linq.JToken s) {
-                Console.WriteLine(s);
-            };
-            db.connect("arthur", "test", callback);
-
-            //string sr = File.ReadAllText("C:\\Users\\arthu\\Desktop\\Sans titre.png");
-            //db.create("/images/public/3.png", sr, callback);
-
-            db.watch("/users", "update", callback);
-
-            Console.ReadKey();
-        }
-    }*/
 }

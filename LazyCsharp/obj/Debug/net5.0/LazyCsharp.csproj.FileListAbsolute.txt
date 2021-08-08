@@ -1,4 +1,3 @@
-C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.csproj.AssemblyReference.cache
 C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.AssemblyInfoInputs.cache
 C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.AssemblyInfo.cs

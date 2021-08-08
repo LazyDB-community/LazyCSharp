@@ -13,12 +13,12 @@
     <PackageIcon>logo_lazydb.png</PackageIcon>
     <PackageIconUrl />
     <NeutralLanguage>en-150</NeutralLanguage>
-    <AssemblyVersion>0.1.0.4</AssemblyVersion>
-    <FileVersion>0.1.0.4</FileVersion>
+    <AssemblyVersion>0.1.0.5</AssemblyVersion>
+    <FileVersion>0.1.0.5</FileVersion>
     <RepositoryType>Github</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
