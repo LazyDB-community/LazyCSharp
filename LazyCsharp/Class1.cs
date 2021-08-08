@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using WebSocketSharp;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
-using System.Threading;
+using System.Linq;
 
 namespace LazyCsharp
 {
@@ -19,6 +18,7 @@ namespace LazyCsharp
         public string addr;
         public int port;
         public int id = 0;
+        public string lazy_sep = "\t\n\'lazy_sep\'\t\n";
         public Dictionary<int, Callback> callbacks = new Dictionary<int, Callback> { };
         public WebSocket ws;
         public List<string> messageQueue = new List<string> { };
@@ -40,6 +40,7 @@ namespace LazyCsharp
                     action();
                     timer.Enabled = true;
                 };
+
                 timer.Enabled = true;
                 return timer;
             }
@@ -51,7 +52,7 @@ namespace LazyCsharp
             }
         }
 
-        public Database(string addr, int port, [Optional] Action<object> onconnect)
+        public Database(string addr, int port, Action<object> onconnect, Action<Object> onclose)
         {
             this.addr = addr;
             this.port = port;
@@ -61,6 +62,11 @@ namespace LazyCsharp
                 onconnect(e);
             };
 
+            this.ws.OnClose += (sender, e) =>
+            {
+                onclose(e);
+            };
+
             this.ws.OnMessage += (sender, e) =>
             {
                 var messages = e.Data.Split("|");
@@ -68,6 +74,8 @@ namespace LazyCsharp
                 {
                     var msg = messages[i];
                     Newtonsoft.Json.Linq.JObject receivedMessage = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(msg);
+                    Newtonsoft.Json.Linq.JToken newReceivedMessage = Newtonsoft.Json.Linq.JToken.FromObject(receivedMessage.ToString());
+
                     if (receivedMessage.Value<bool>("s"))
                     {
                         this.callbacks[receivedMessage.Value<int>("id")].success.Invoke(receivedMessage.GetValue("r"));
@@ -110,6 +118,7 @@ namespace LazyCsharp
         public void send(string name, Object args, Callback callback)
         {
             int id = ++this.id;
+
             Send send = new Send
             {
                 c = name,
@@ -127,7 +136,7 @@ namespace LazyCsharp
 
         public void connect(string email, string password, Callback callback)
         {
-            Dictionary<string, string> args = new Dictionary<string, string> { };
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
             args.Add("email", email);
             args.Add("password", password);
 
@@ -136,7 +145,7 @@ namespace LazyCsharp
 
         public void register(string email, string password, string username, string full_name, Callback callback)
         {
-            Dictionary<string, string> args = new Dictionary<string, string> { };
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
             args.Add("email", email);
             args.Add("password", password);
             args.Add("username", username);
@@ -147,14 +156,43 @@ namespace LazyCsharp
 
         public void create(string keyPath, Newtonsoft.Json.Linq.JObject value, Callback callback)
         {
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("value", value);
+
+            this.create_process(keyPath, args, callback);
+        }
+
+        public void create(string keyPath, Newtonsoft.Json.Linq.JToken value, Callback callback)
+        {
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("value", value);
+
+            this.create_process(keyPath, args, callback);
+        }
+
+        public void create_process(string keyPath, Newtonsoft.Json.Linq.JObject args, Callback callback)
+        {
+            var key = keyPath.Split("/");
+
+            args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+            args.Add("w", true);
+
+            this.send("create", args, callback);
+        }
+
+        public void watch(string keyPath, string command, Callback callback)
+        {
+            /*
+             * IN DEVELOPPEMENT
+             */
+            /*var key = keyPath.Split("/").Where(x => string.IsNullOrEmpty(x) == false).ToArray();*/
             var key = keyPath.Split("/");
 
             Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
             args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
-            args.Add("value", value);
-            args.Add("w", true);
+            args.Add("command", command);
 
-            this.send("create", args, callback);
+            this.send("watch", args, callback);
         }
 
         public void get(string keyPath, Callback callback)
@@ -220,16 +258,62 @@ namespace LazyCsharp
             this.send("size", args, callback);
         }
 
-        public void setTimeout(Action TheAction, int Timeout)
+        /*
+         * IN DEVELOPPEMENT
+         */
+        public void sort(string keyPath, String character, int number, int count, int start, String order, Callback callback)
         {
-            Thread t = new Thread(
-                () =>
-                {
-                    Thread.Sleep(Timeout);
-                    TheAction.Invoke();
-                }
-            );
-            t.Start();
+            var key = keyPath.Split("/").Where(x => string.IsNullOrEmpty(x) == false).ToArray();
+
+            Newtonsoft.Json.Linq.JObject split = new Newtonsoft.Json.Linq.JObject { };
+            split.Add("char", character);
+            split.Add("num", number);
+
+            Newtonsoft.Json.Linq.JObject result = new Newtonsoft.Json.Linq.JObject { };
+            result.Add("count", count);
+            result.Add("start", start);
+            result.Add("order", order);
+
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+            args.Add("split", split);
+            args.Add("result", result);
+            args.Add("order", order);
+
+            Console.WriteLine(args);
+
+            this.send("sort", args, callback);
         }
     }
+
+    /*
+    * FOR DEBUG
+    */
+    /*class Program
+    {
+        static void Main()
+        {
+            Database db = new Database("eu.indivis.cloud", 42600, delegate (Object s) {
+                Console.WriteLine("LazyDB is start!");
+            }, delegate (Object s) {
+                Console.WriteLine("LazyDB is stop!");
+            });
+
+            Callback callback = new Callback();
+            callback.success = delegate (Newtonsoft.Json.Linq.JToken s) {
+                Console.WriteLine(s);
+            };
+            callback.fail = delegate (Newtonsoft.Json.Linq.JToken s) {
+                Console.WriteLine(s);
+            };
+            db.connect("arthur", "test", callback);
+
+            //string sr = File.ReadAllText("C:\\Users\\arthu\\Desktop\\Sans titre.png");
+            //db.create("/images/public/3.png", sr, callback);
+
+            db.watch("/users", "update", callback);
+
+            Console.ReadKey();
+        }
+    }*/
 }
