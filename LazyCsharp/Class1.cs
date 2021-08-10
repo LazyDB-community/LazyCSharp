@@ -13,6 +13,28 @@ namespace LazyCsharp
         public Action<Newtonsoft.Json.Linq.JToken> fail;
     }
 
+    public static class Interval
+    {
+        public static System.Timers.Timer Set(Action action, int interval)
+        {
+            var timer = new System.Timers.Timer(interval);
+            timer.Elapsed += (s, e) => {
+                timer.Enabled = false;
+                action();
+                timer.Enabled = true;
+            };
+
+            timer.Enabled = true;
+            return timer;
+        }
+
+        public static void Stop(System.Timers.Timer timer)
+        {
+            timer.Stop();
+            timer.Dispose();
+        }
+    }
+
     public class Database
     {
         public string addr;
@@ -28,28 +50,6 @@ namespace LazyCsharp
             public bool s { get; set; }
             public int id { get; set; }
             public object r { get; set; }
-        }
-
-        public static class Interval
-        {
-            public static System.Timers.Timer Set(Action action, int interval)
-            {
-                var timer = new System.Timers.Timer(interval);
-                timer.Elapsed += (s, e) => {
-                    timer.Enabled = false;
-                    action();
-                    timer.Enabled = true;
-                };
-
-                timer.Enabled = true;
-                return timer;
-            }
-
-            public static void Stop(System.Timers.Timer timer)
-            {
-                timer.Stop();
-                timer.Dispose();
-            }
         }
 
         public Database(string addr, int port, Action<object> onconnect, Action<object> onclose)
@@ -196,6 +196,34 @@ namespace LazyCsharp
             this.send("watch", args, callback);
         }
 
+        /*
+        * IN DEVELOPPEMENT | NOT STABLE
+        */
+        public void on(string keyPath, string command, Callback callback)
+        {
+            var key = keyPath.Split("/");
+
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+            args.Add("command", command);
+
+            this.send("on", args, callback);
+        }
+
+        /*
+        * IN DEVELOPPEMENT | NOT STABLE
+        */
+        public void ping(string keyPath, string command, Callback callback)
+        {
+            var key = keyPath.Split("/");
+
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+            args.Add("command", command);
+
+            this.send("on", args, callback);
+        }
+
         public void get(string keyPath, Callback callback)
         {
             var key = keyPath.Split("/");
@@ -282,6 +310,53 @@ namespace LazyCsharp
             args.Add("order", order);
 
             this.send("sort", args, callback);
+        }
+
+        public void forgotPassword(string email, Callback callback)
+        {
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("email", email);
+
+            this.send("forgot_password", args, callback);
+        }
+
+        public void editPassword(string code, string password, string email, Callback callback)
+        {
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("code", code);
+            args.Add("password", password);
+            args.Add("email", email);
+
+            this.send("edit_password", args, callback);
+        }
+
+        /*
+         * IN DEVELOPPEMENT | NOT STABLE
+         */
+        public void append(string keyPath, Object value, Callback callback)
+        {
+            var key = keyPath.Split("/");
+
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+            args.Add("value", Newtonsoft.Json.Linq.JToken.FromObject(value));
+
+            this.send("append", args, callback);
+        }
+
+        /*
+         * IN DEVELOPPEMENT | NOT STABLE
+         */
+        public void stop(string name, string command, string keyPath, Callback callback)
+        {
+            var key = keyPath.Split("/");
+
+            Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+            args.Add("event", name);
+            args.Add("command", command);
+            args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+
+            this.send("append", args, callback);
         }
     }
 }
