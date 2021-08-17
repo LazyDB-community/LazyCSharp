@@ -37,9 +37,10 @@ namespace LazyCsharp
 
     public class Database
     {
-        public string addr;
+        public string adress;
         public int port;
         public int id = 0;
+        public bool secureIsActived;
         public string lazy_sep = "\t\n\'lazy_sep\'\t\n";
         public Dictionary<int, Callback> callbacks = new Dictionary<int, Callback> { };
         public WebSocket ws;
@@ -52,19 +53,21 @@ namespace LazyCsharp
             public object r { get; set; }
         }
 
-        public Database(string addr, int port, Action<object> onconnect, Action<object> onclose)
+        public Database(string adress, int port, Action<object> onConnect, Action<object> onClose, bool secureIsActived)
         {
-            this.addr = addr;
+            this.adress = adress;
             this.port = port;
-            this.ws = new WebSocket($"ws://{addr}:{port}");
+            this.secureIsActived = secureIsActived;
+
+            this.ws = new WebSocket(secureIsActived ? $"wss://{adress}:{port}" : $"ws://{adress}:{port}");
             this.ws.OnOpen += (sender, e) =>
             {
-                onconnect(e);
+                onConnect(e);
             };
 
             this.ws.OnClose += (sender, e) =>
             {
-                onclose(e);
+                onClose(e);
             };
 
             this.ws.OnMessage += (sender, e) =>
@@ -182,9 +185,6 @@ namespace LazyCsharp
             this.send("create", args, callback);
         }
 
-        /*
-        * IN DEVELOPPEMENT | NOT STABLE
-        */
         public void watch(string keyPath, string command, Callback callback)
         {
             var key = keyPath.Split("/");
@@ -196,9 +196,6 @@ namespace LazyCsharp
             this.send("watch", args, callback);
         }
 
-        /*
-        * IN DEVELOPPEMENT | NOT STABLE
-        */
         public void on(string keyPath, string command, Callback callback)
         {
             var key = keyPath.Split("/");
@@ -210,9 +207,6 @@ namespace LazyCsharp
             this.send("on", args, callback);
         }
 
-        /*
-        * IN DEVELOPPEMENT | NOT STABLE
-        */
         public void ping(string keyPath, string command, Callback callback)
         {
             var key = keyPath.Split("/");
@@ -287,9 +281,6 @@ namespace LazyCsharp
             this.send("size", args, callback);
         }
 
-        /*
-         * IN DEVELOPPEMENT | NOT STABLE
-         */
         public void sort(string keyPath, String character, int number, int count, int start, String order, Callback callback)
         {
             var key = keyPath.Split("/").Where(x => string.IsNullOrEmpty(x) == false).ToArray();
@@ -330,9 +321,6 @@ namespace LazyCsharp
             this.send("edit_password", args, callback);
         }
 
-        /*
-         * IN DEVELOPPEMENT | NOT STABLE
-         */
         public void append(string keyPath, Object value, Callback callback)
         {
             var key = keyPath.Split("/");
@@ -344,9 +332,6 @@ namespace LazyCsharp
             this.send("append", args, callback);
         }
 
-        /*
-         * IN DEVELOPPEMENT | NOT STABLE
-         */
         public void stop(string name, string command, string keyPath, Callback callback)
         {
             var key = keyPath.Split("/");
