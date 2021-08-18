@@ -13,16 +13,16 @@
     <PackageIcon>logo_lazydb.png</PackageIcon>
     <PackageIconUrl />
     <NeutralLanguage>en-150</NeutralLanguage>
-    <AssemblyVersion>0.1.0.7</AssemblyVersion>
-    <FileVersion>0.1.0.7</FileVersion>
+    <AssemblyVersion>0.1.0.8</AssemblyVersion>
+    <FileVersion>0.1.0.8</FileVersion>
     <RepositoryType>Github</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <PackageReleaseNotes>Integration of the security system and patching of a small bug</PackageReleaseNotes>
+    <PackageReleaseNotes>Update integration of the security system</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

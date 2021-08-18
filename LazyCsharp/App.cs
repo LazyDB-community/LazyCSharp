@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using WebSocketSharp;
 using Newtonsoft.Json;
@@ -60,7 +60,8 @@ namespace LazyCsharp
             this.secureIsActived = secureIsActived;
 
             this.ws = new WebSocket(secureIsActived ? $"wss://{adress}:{port}" : $"ws://{adress}:{port}");
-            this.ws.OnOpen += (sender, e) =>
+			this.ws.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
+			this.ws.OnOpen += (sender, e) =>
             {
                 onConnect(e);
             };
@@ -89,6 +90,11 @@ namespace LazyCsharp
                     }
                 }
             };
+
+            this.ws.SslConfiguration.ServerCertificateValidationCallback =
+              (sender, certificate, chain, sslPolicyErrors) => {
+                return true;
+              };
 
             Interval.Set(sendQueue, 100);
 
