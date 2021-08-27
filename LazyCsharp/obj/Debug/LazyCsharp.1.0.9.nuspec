@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>LazyCsharp</id>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <authors>LazyDB</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">MIT</license>
@@ -10,7 +10,7 @@
     <icon>logo_lazydb.png</icon>
     <projectUrl>https://github.com/LazyDB-community/LazyCSharp</projectUrl>
     <description>Connector for LazyDB in CSharp.</description>
-    <releaseNotes>Update integration of the security system</releaseNotes>
+    <releaseNotes>New syntax, addition of features</releaseNotes>
     <copyright>© 2021 Web.Workers</copyright>
     <repository type="Github" url="https://github.com/LazyDB-community/LazyCSharp" />
     <dependencies>
@@ -21,7 +21,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\arthu\source\repos\LazyCsharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.dll" target="lib\net5.0\LazyCsharp.dll" />
+    <file src="C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.dll" target="lib\net5.0\LazyCsharp.dll" />
     <file src="C:\Users\arthu\Desktop\logo_lazydb.png" target="logo_lazydb.png" />
   </files>
 </package>
