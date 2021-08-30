@@ -80,7 +80,7 @@
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
-    "version": "1.0.9",
+    "version": "1.0.11",
     "restore": {
       "projectUniqueName": "C:\\Users\\arthu\\Documents\\GitHub\\LazyCSharp\\LazyCsharp\\LazyCsharp.csproj",
       "projectName": "LazyCsharp",

@@ -351,5 +351,31 @@ namespace LazyCsharp
 
 			this.send("keys", args, callback);
 		}
+
+		public void join(int gid, Callback callback)
+		{
+			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+			args.Add("gid", gid);
+
+			this.send("join", args, callback);
+		}
+
+		public void invite(int gid, int uid, string role, Callback callback)
+		{
+			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+			args.Add("gid", gid);
+			args.Add("uid", uid);
+			args.Add("role", role);
+
+			this.send("invite", args, callback);
+		}
+
+		public void leave(int gid, Callback callback)
+		{
+			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+			args.Add("gid", gid);
+
+			this.send("leave", args, callback);
+		}
 	}
 }

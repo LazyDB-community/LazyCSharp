@@ -2,7 +2,6 @@ C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\bin\Debug\net5.0\LazyCshar
 C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.dll
 C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\bin\Debug\net5.0\ref\LazyCsharp.dll
 C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.pdb
-C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.csproj.AssemblyReference.cache
 C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.AssemblyInfoInputs.cache
 C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\obj\Debug\net5.0\LazyCsharp.AssemblyInfo.cs
