@@ -22,7 +22,7 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <PackageReleaseNotes>New syntax, addition of features</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding features</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
