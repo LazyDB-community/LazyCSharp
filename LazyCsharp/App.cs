@@ -243,15 +243,28 @@ namespace LazyCsharp
 			this.send("watch", args, callback);
 		}
 
-		public void ping(string command, string keyPath, Callback callback)
+		public void ping(string keyPath, object data, string uid, Callback callback)
 		{
 			var key = keyPath.Split("/");
 
 			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
 			args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
-			args.Add("command", command);
+			args.Add("data", Newtonsoft.Json.Linq.JToken.FromObject(data));
+			args.Add("uid", uid);
 
-			this.send("on", args, callback);
+			this.send("ping", args, callback);
+		}
+
+		public void pong(string keyPath, object data, string uid, Callback callback)
+		{
+			var key = keyPath.Split("/");
+
+			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+			args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+			args.Add("data", Newtonsoft.Json.Linq.JToken.FromObject(data));
+			args.Add("uid", uid);
+
+			this.send("ping", args, callback);
 		}
 
 		public void stop(string name, string command, string keyPath, Callback callback)
@@ -376,6 +389,17 @@ namespace LazyCsharp
 			args.Add("gid", gid);
 
 			this.send("leave", args, callback);
+		}
+
+		public void run(string keyPath, object arguments, Callback callback)
+		{
+			var key = keyPath.Split("/");
+
+			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+			args.Add("keyPath", Newtonsoft.Json.Linq.JToken.FromObject(key));
+			args.Add("value", Newtonsoft.Json.Linq.JToken.FromObject(arguments));
+
+			this.send("run", args, callback);
 		}
 	}
 }

@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "LazyCsharp/1.0.11": {
+      "LazyCsharp/1.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.1",
           "WebSocketSharp-netstandard": "1.0.1"
@@ -34,7 +34,7 @@
     }
   },
   "libraries": {
-    "LazyCsharp/1.0.11": {
+    "LazyCsharp/1.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
