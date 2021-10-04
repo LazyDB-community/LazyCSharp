@@ -40,7 +40,7 @@
 Using LazyDB in C# is really easy, you only need to create a Database object!
 
 ```c#
-Database db = new Database("youtproject.lazydb.com", 42600, delegate (Object s) {
+Database db = new Database("alpha.lazydb.com", your_port, delegate (Object s) {
     Console.WriteLine("Connection to your LazyDB server established!");
 }, delegate (Object s) {
     Console.WriteLine("connection to your LazyDB server is no longer established!");
