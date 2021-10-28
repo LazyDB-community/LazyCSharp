@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>LazyCsharp</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <authors>LazyDB</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
-    <icon>OIF.jpg</icon>
+    <icon>logo_lazydb.png</icon>
     <projectUrl>https://github.com/LazyDB-community/LazyCSharp</projectUrl>
     <description>Connector for LazyDB in CSharp.</description>
-    <releaseNotes>Adding features</releaseNotes>
+    <releaseNotes>Added the dnsResolve function.</releaseNotes>
     <copyright>© 2021 Web.Workers</copyright>
     <repository type="Github" url="https://github.com/LazyDB-community/LazyCSharp" />
     <dependencies>
@@ -21,7 +21,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.dll" target="lib\net5.0\LazyCsharp.dll" />
-    <file src="C:\Users\arthu\Desktop\OIF.jpg" target="OIF.jpg" />
+    <file src="C:\Users\arthu\Desktop\git\LazyCSharp\LazyCsharp\bin\Debug\net5.0\LazyCsharp.dll" target="lib\net5.0\LazyCsharp.dll" />
+    <file src="C:\Users\arthu\Desktop\git\LazyCSharp\logo_lazydb.png" target="logo_lazydb.png" />
   </files>
 </package>

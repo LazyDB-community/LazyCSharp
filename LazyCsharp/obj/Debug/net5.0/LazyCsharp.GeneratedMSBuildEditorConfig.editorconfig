@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = LazyCsharp
-build_property.ProjectDir = C:\Users\arthu\Documents\GitHub\LazyCSharp\LazyCsharp\
+build_property.ProjectDir = C:\Users\arthu\Desktop\git\LazyCSharp\LazyCsharp\

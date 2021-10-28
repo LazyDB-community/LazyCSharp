@@ -189,7 +189,7 @@ namespace LazyCsharp
 			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
 			args.Add("value", value);
 
-			this.create_process(keyPath, args, callback);
+			this.createProcess(keyPath, args, callback);
 		}
 
 		public void create(string keyPath, Newtonsoft.Json.Linq.JToken value, Callback callback)
@@ -197,10 +197,10 @@ namespace LazyCsharp
 			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
 			args.Add("value", value);
 
-			this.create_process(keyPath, args, callback);
+			this.createProcess(keyPath, args, callback);
 		}
 
-		public void create_process(string keyPath, Newtonsoft.Json.Linq.JObject args, Callback callback)
+		public void createProcess(string keyPath, Newtonsoft.Json.Linq.JObject args, Callback callback)
 		{
 			var key = keyPath.Split("/");
 
@@ -400,6 +400,13 @@ namespace LazyCsharp
 			args.Add("value", Newtonsoft.Json.Linq.JToken.FromObject(arguments));
 
 			this.send("run", args, callback);
+		}
+		public void dnsResolve(string domain_name, object arguments, Callback callback)
+		{
+			Newtonsoft.Json.Linq.JObject args = new Newtonsoft.Json.Linq.JObject { };
+			args.Add("domain_name", domain_name);
+
+			this.send("dns_resolve", args, callback);
 		}
 	}
 }

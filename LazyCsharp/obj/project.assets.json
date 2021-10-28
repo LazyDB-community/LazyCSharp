@@ -76,20 +76,20 @@
   },
   "packageFolders": {
     "C:\\Users\\arthu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "D:\\VS3\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\arthu\\Documents\\GitHub\\LazyCSharp\\LazyCsharp\\LazyCsharp.csproj",
+      "projectUniqueName": "C:\\Users\\arthu\\Desktop\\git\\LazyCSharp\\LazyCsharp\\LazyCsharp.csproj",
       "projectName": "LazyCsharp",
-      "projectPath": "C:\\Users\\arthu\\Documents\\GitHub\\LazyCSharp\\LazyCsharp\\LazyCsharp.csproj",
+      "projectPath": "C:\\Users\\arthu\\Desktop\\git\\LazyCSharp\\LazyCsharp\\LazyCsharp.csproj",
       "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\arthu\\Documents\\GitHub\\LazyCSharp\\LazyCsharp\\obj\\",
+      "outputPath": "C:\\Users\\arthu\\Desktop\\git\\LazyCSharp\\LazyCsharp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "D:\\VS3\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [

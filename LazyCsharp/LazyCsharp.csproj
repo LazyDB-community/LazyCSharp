@@ -10,19 +10,19 @@
     <PackageProjectUrl>https://github.com/LazyDB-community/LazyCSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/LazyDB-community/LazyCSharp</RepositoryUrl>
     <Description>Connector for LazyDB in CSharp.</Description>
-    <PackageIcon>OIF.jpg</PackageIcon>
+    <PackageIcon>logo_lazydb.png</PackageIcon>
     <PackageIconUrl />
     <NeutralLanguage>en-150</NeutralLanguage>
-    <AssemblyVersion>0.1.1.0</AssemblyVersion>
-    <FileVersion>0.1.1.0</FileVersion>
+    <AssemblyVersion>0.1.1.1</AssemblyVersion>
+    <FileVersion>0.1.1.1</FileVersion>
     <RepositoryType>Github</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <PackageReleaseNotes>Adding features</PackageReleaseNotes>
+    <PackageReleaseNotes>Added the dnsResolve function.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\Desktop\OIF.jpg">
+    <None Include="..\logo_lazydb.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
